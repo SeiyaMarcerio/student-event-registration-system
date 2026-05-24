@@ -35,3 +35,10 @@ MySQL database stores events and participant information.
 - 413855122 王文光
 - 413854638 謝宜成
 - 414857010 邱培榮
+
+## Current Development
+Week 13 development includes:
+- Basic PHP pages
+- Event listing
+- Registration form
+- Simple database connection
