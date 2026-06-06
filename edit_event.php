@@ -1,18 +1,17 @@
 <?php
 include 'db.php';
 
-echo "<h1>Event Registration</h1>";
-
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-    $user_id = 1;
     $event_id = $_POST["event_id"];
+    $capacity = $_POST["capacity"];
 
-    $sql = "INSERT INTO registrations (user_id, event_id)
-            VALUES ($user_id, $event_id)";
+    $sql = "UPDATE events
+            SET capacity = $capacity
+            WHERE event_id = $event_id";
 
     if (mysqli_query($conn, $sql)) {
-        echo "<p>Registration successful!</p>";
+        echo "<p>Event updated successfully!</p>";
     } else {
         echo "<p>Error: " . mysqli_error($conn) . "</p>";
     }
@@ -20,9 +19,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 $result = mysqli_query($conn, "SELECT * FROM events");
 
-echo "<form method='POST'>";
+echo "<h1>Edit Event Capacity</h1>";
 
-echo "<label>Select Event:</label><br><br>";
+echo "<form method='POST'>";
 
 echo "<select name='event_id'>";
 
@@ -37,7 +36,12 @@ while ($row = mysqli_fetch_assoc($result)) {
 
 echo "</select><br><br>";
 
-echo "<button type='submit'>Register</button>";
+echo "New Capacity: ";
+echo "<input type='number' name='capacity' required>";
+
+echo "<br><br>";
+
+echo "<button type='submit'>Update Event</button>";
 
 echo "</form>";
 ?>
